@@ -1,6 +1,10 @@
+using BlazorLoginApp.Authentication;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using BlazorLoginApp.Data;
+using BlazorLoginApp.Services;
+using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.JSInterop;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +12,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
+builder.Services.AddScoped<AuthenticationStateProvider, SimpleAuthenticationStateProvider>();
+builder.Services.AddScoped<IUserService, UserServiceImpl>();
+builder.Services.AddScoped<IAuthService,AuthServiceImpl>();
 
 var app = builder.Build();
 
